@@ -1,0 +1,47 @@
+body {
+  font-family: 'Raleway', sans-serif;
+  background-color: #ecf0f1;
+  background-image: url("../img/background.png");
+
+}
+
+ul, li {
+  list-style-type: none;
+}
+
+h1 {
+  font-family: 'Roboto', sans-serif;
+  color: #eee;
+  line-height: 2em;
+      text-shadow: 0 2px 2px black;
+}
+
+
+.header {
+  background-color: #3498db;
+  box-shadow: 0 3px 3px black;
+
+}
+
+
+.content {
+  background-color: #bdc3c7;
+  margin-top: 2%;
+  padding: 5%;
+  box-shadow: 2px 2px 2px black;
+}
+
+
+.contactcontainer {
+  background-color: #eee;
+  padding: 2%;
+  box-shadow: 2px 2px 2px black;
+  font-size: 1.5em;
+}
+
+.formcontainer {
+background-color: #bdc3c7;
+padding: 2%;
+margin-top: 2%;
+box-shadow: 2px 2px 2px black;
+}
