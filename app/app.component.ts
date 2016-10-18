@@ -1,55 +1,12 @@
 import { Component, Input} from '@angular/core';
-import {SearchBox} from './search-box';
+
 import {SearchPipe} from './search-pipe';
+import {orderByPipe} from './orderByPipe';
 
 @Component({
   selector: 'my-app',
-  directives: [SearchBox],
-  pipes: [SearchPipe],
-  template: `<div class="container-fluid header">
-  <h1 class="text-center">{{title}}</h1>
-  </div>
-  <div class="container formcontainer">
-  <div class="row">
-  <div class="col-xs-4 text-right">Rechercher : </div>
-  <div class="col-xs-8"><search-box (update)="term = $event"></search-box></div>
-  <form #contactForm="ngForm" (ngSubmit)="onSubmit()">
-  <div class="col-xs-3"><input type="text" id="firstname" ngControl="firstname"  required class="form form-control" placeholder="prénom"></div>
-  <div class="col-xs-3"><input class="form form-control" placeholder="téléphone"></div>
-  <div class="col-xs-3"><input class="form form-control" placeholder="adresse"></div>
-  <div class="col-xs-3"><button type="submit" class="btn btn-info">Ajouter</button></div>
-  </form>
-  </div>
-  </div>
-  <div class="container content">
-  <div class="col-xs-6">
-  <h2>Vous avez {{friends.length}} contacts</h2>
-  <div class="contactcontainer">
-  <ul>
-  <li class="heroes" (click)="showDetails(friend)" *ngFor = "let friend of friends">
-    <button class="btn btn-info">X</button>  <img [src]="friend.image">    {{friend.firstname}}
-  </li>
-  </ul>
-  </div>
-  </div>
-  <div class="col-xs-6">
-  <div *ngIf="!details">
-  <h2>Cliquez sur un contact pour afficher les details</h2>
-  </div>
-  <div *ngIf="details">
-    <h2>Details</h2>
-    <div class="contactcontainer">
-    <p>Contact ajouté le {{details.timestamp*1000 | date: 'dd/MM/yyyy'}}</p>
-    <ul>
-    <li>Prénom: {{details.firstname}} </li>
-    <li>Téléphone: {{details.phone}}</li>
-    <li>adresse: {{details.address}}  {{details.cp}}</li>
-    </ul>
-    </div>
-  </div>
-  </div>
-</div>
-  `
+  pipes: [SearchPipe, orderByPipe],
+  templateUrl: '.app.component.html'
 
 
 
@@ -67,13 +24,21 @@ friends = [
     {isActive:false, firstname: 'Mark', phone: '0756458211', address: '10 Bld de Montmorency', cp:'75016',myRequest : false, timestamp: 1473082800, image: "https://randomuser.me/api/portraits/thumb/men/86.jpg" }
   ];
 
-    newFriend:Object;
+    newFriend:Object = {} ;
 
   details:Object;
 
-  @Input() term;
 
   onSubmit(){
+    var timestamp = Math.round(Date.now() / 1000) ;
+
+    console.log('ok');
+    this.newFriend.isActive = false;
+    this.newFriend.cp = "75000";
+    this.newFriend.myRequest = false;
+    this.newFriend.timestamp = timestamp;
+    this.newFriend.image = "https://randomuser.me/api/portraits/thumb/men/5.jpg";
+    this.friends.push(this.newFriend);
 
   }
 
@@ -82,8 +47,20 @@ friends = [
     this.details = friend;
   }
 
+hideDetails() {
+  this.details = false;
+}
+
+deleteFriend (friend) {
+  let index = this.friends.indexOf(friend);
+  this.friends.splice(index, 1);
+  this.details = false;
+}
 // |search: term
 //<div [term]="term" class="contactcontainer">
 //[(ngModel)]="newFriend.firstname"
 
  }
+
+
+//https://github.com/DenisVuyka/ng2samples-blank

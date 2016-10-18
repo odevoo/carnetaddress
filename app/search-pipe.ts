@@ -1,11 +1,14 @@
-import {Pipe} from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
     name: "search"
 })
 
-export class SearchPipe {
-    transform(value, [term]) {
-        return value.filter((item) => item.firstname.toUpperCase().includes(term));
+export class SearchPipe implements PipeTransform {
+    transform(value, param) {
+        if(param == undefined ) {return value}
+        else{
+        return value.filter((item) => item.firstname.toLowerCase().includes(param));
+          }
     }
 }

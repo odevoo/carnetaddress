@@ -1,0 +1,49 @@
+<div class="container-fluid header">
+<h1 class="text-center">{{title}}</h1>
+</div>
+<div class="container formcontainer">
+<div class="row">
+<div class="col-xs-4 text-right">
+<select class="form form-control" [(ngModel)]="param">
+<option value="firstname">Ordre alphabétique</option>
+<option value="timestamp">par date</option>
+</select>
+</div>
+<div class="col-xs-8"><input class="form form-control" #input type="text" [(ngModel)]="word" placeholder="Rechercher"></div>
+<form (ngSubmit)="onSubmit()">
+<div class="col-xs-3"><input type="text" [(ngModel)]="newFriend.firstname"  required class="form form-control" placeholder="prénom"></div>
+<div class="col-xs-3"><input class="form form-control" [(ngModel)]="newFriend.phone" required placeholder="téléphone"></div>
+<div class="col-xs-3"><input class="form form-control" [(ngModel)]="newFriend.address" required placeholder="adresse"></div>
+<div class="col-xs-3"><button type="submit" class="btn btn-info">Ajouter</button></div>
+</form>
+</div>
+</div>
+<div class="container content">
+<div class="col-xs-6">
+<h2>Vous avez {{friends.length}} contacts</h2>
+<div class="contactcontainer">
+<ul>
+<li  (click)="showDetails(friend)" *ngFor = "let friend of friends | search: word | orderBy: param">
+  <button (click)="deleteFriend(friend)" class="btn btn-info">X</button>  <img [src]="friend.image">    {{friend.firstname}}
+</li>
+</ul>
+</div>
+</div>
+<div class="col-xs-6">
+<div *ngIf="!details">
+<h2>Cliquez sur un contact pour afficher les details</h2>
+</div>
+<div *ngIf="details">
+  <h2>Details</h2>
+  <div class="contactcontainer">
+  <p>Contact ajouté le {{details.timestamp*1000 | date: 'd/MM/y'}}</p>
+  <ul>
+  <li>Prénom: {{details.firstname}} </li>
+  <li>Téléphone: {{details.phone}}</li>
+  <li>adresse: {{details.address}}  {{details.cp}}</li>
+  <li><button class="btn btn-info" (click)="hideDetails(friend)">Cacher les details</button></li>
+  </ul>
+  </div>
+</div>
+</div>
+</div>

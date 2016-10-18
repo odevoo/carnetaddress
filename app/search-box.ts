@@ -4,7 +4,7 @@ import {Component, Output, EventEmitter} from '@angular/core';
     selector: 'search-box',
     template: `
 <div>
-    <input #input type="text" (input)="update.emit(input.value.toUpperCase())" placeholder="Rechercher">
+    <input class="form form-control" #input type="text" (input)="update.emit(input.value.toUpperCase())" placeholder="Rechercher">
 </div>
 `
 })
