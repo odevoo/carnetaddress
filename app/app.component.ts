@@ -1,13 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, Input} from '@angular/core';
+import {SearchBox} from './search-box';
+import {SearchPipe} from './search-pipe';
+
 @Component({
   selector: 'my-app',
+  directives: [SearchBox],
+  pipes: [SearchPipe],
   template: `<div class="container-fluid header">
   <h1 class="text-center">{{title}}</h1>
   </div>
   <div class="container formcontainer">
   <div class="row">
   <div class="col-xs-4 text-right">Rechercher : </div>
-  <div class="col-xs-8"><input class="form form-control"></div>
+  <div class="col-xs-8"><search-box (update)="term = $event"></search-box></div>
   <div class="col-xs-3">Prénom: <input class="form form-control"></div>
   <div class="col-xs-3">Phone: <input class="form form-control"></div>
   <div class="col-xs-3">address: <input class="form form-control"></div>
@@ -62,11 +67,14 @@ friends = [
 
   details:Object;
 
+  @Input() term;
+
   showDetails(friend){
 
     this.details = friend;
   }
 
-
+// |search: term
+//<div [term]="term" class="contactcontainer">
 
  }
