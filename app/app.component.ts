@@ -13,10 +13,12 @@ import {SearchPipe} from './search-pipe';
   <div class="row">
   <div class="col-xs-4 text-right">Rechercher : </div>
   <div class="col-xs-8"><search-box (update)="term = $event"></search-box></div>
-  <div class="col-xs-3">Prénom: <input class="form form-control"></div>
-  <div class="col-xs-3">Phone: <input class="form form-control"></div>
-  <div class="col-xs-3">address: <input class="form form-control"></div>
-  <div class="col-xs-3"><button class="btn btn-info">Ajouter</button></div>
+  <form #contactForm="ngForm" (ngSubmit)="onSubmit()">
+  <div class="col-xs-3"><input type="text" id="firstname" ngControl="firstname"  required class="form form-control" placeholder="prénom"></div>
+  <div class="col-xs-3"><input class="form form-control" placeholder="téléphone"></div>
+  <div class="col-xs-3"><input class="form form-control" placeholder="adresse"></div>
+  <div class="col-xs-3"><button type="submit" class="btn btn-info">Ajouter</button></div>
+  </form>
   </div>
   </div>
   <div class="container content">
@@ -65,9 +67,15 @@ friends = [
     {isActive:false, firstname: 'Mark', phone: '0756458211', address: '10 Bld de Montmorency', cp:'75016',myRequest : false, timestamp: 1473082800, image: "https://randomuser.me/api/portraits/thumb/men/86.jpg" }
   ];
 
+    newFriend:Object;
+
   details:Object;
 
   @Input() term;
+
+  onSubmit(){
+
+  }
 
   showDetails(friend){
 
@@ -76,5 +84,6 @@ friends = [
 
 // |search: term
 //<div [term]="term" class="contactcontainer">
+//[(ngModel)]="newFriend.firstname"
 
  }
