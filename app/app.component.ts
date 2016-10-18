@@ -6,7 +6,7 @@ import {orderByPipe} from './orderByPipe';
 @Component({
   selector: 'my-app',
   pipes: [SearchPipe, orderByPipe],
-  templateUrl: '.app.component.html'
+  templateUrl: 'app/app.component.html'
 
 
 
